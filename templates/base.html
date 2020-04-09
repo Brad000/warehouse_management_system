@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>BB Storage Solutions</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+
+<body>
+	<div class="container">
+		{% block content %} {% endblock %}
+	</div>
+    <script src="https://kit.fontawesome.com/5655c570e1.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+            $('#customer_code').autocomplete({
+                 data: {
+                        "AB01 - AB World Foods": 'https://images.squarespace-cdn.com/content/v1/5b17865575f9ee4ef2fc3753/1529572394387-BJE9QK0158KDFPM5E5RQ/ke17ZwdGBToddI8pDm48kOrJXpdU7qr4nYIxpCB5agBZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-uLCmohLBJdXOzOaRx_2e3a7m0x-_7KI13no3j2K-fHFg/A-B-World-Foods-Logo-Client-Watershed-Group-uai-258x258.jpg'
+      },
+    });
+            $('#product_code').autocomplete({
+                 data: {
+                        "KR0235": null,
+                        "KR0021": null
+      },
+    });
+  }); 
+     
+     
+     
+     
+     
+     
+	</script>
+</body>
+
+</html>

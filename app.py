@@ -1,12 +1,14 @@
 import os
-from flask import Flask
+from flask import Flask, render_template, redirect, request, url_for, request
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
-    return "<h1>You are Here</h1>"
+@app.route('/manage_stock_cards')
+def manage_stock_cards():
+    return render_template("stockcard.html")
 
 
 if __name__ == '__main__':
