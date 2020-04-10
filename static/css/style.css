@@ -1,8 +1,8 @@
-.sc-search-button{
-    width: 15em;
-}
-
 .page-heading{
     text-align: center;
+    padding-bottom: 0.5em;
+}
 
+.sc-button{
+    margin-right: 1.1em;
 }
