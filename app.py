@@ -1,6 +1,11 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, request
+import pymongo
+from flask import Flask, render_template, redirect, request, url_for
+from os import path
+if path.exists("env.py"):
+    import env
 
+MONGODB_URI = os.environ.get("MONGO_URI")
 
 app = Flask(__name__)
 
