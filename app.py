@@ -19,6 +19,18 @@ def manage_stock_cards():
                            stock_cards=mongo.db.stock_cards.find())
 
 
+@app.route('/add_stock_cards')
+def add_stock_cards():
+    return render_template('addstockcard.html')
+
+
+@app.route('/insert_stock_cards', methods=['POST'])
+def insert_stock_cards():
+    stock_cards = mongo.db.stock_cards
+    stock_cards.insert_one(request.form.to_dict())
+    return redirect(url_for('manage_stock_cards'))
+
+
 @app.route('/edit_stock_cards')
 def edit_stock_cards():
     return render_template('editstockcard.html')
