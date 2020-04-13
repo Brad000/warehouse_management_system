@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
 <h3 class="page-heading">Edit Stock Card</h3>
-
 <div class="row">
 	<form action="{{url_for('update_stock_cards', stock_cards_id=stock_cards._id)}}" method="POST" class="col s12">
 		<div class="row">
@@ -53,6 +52,7 @@
 		<button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="action"><i class="material-icons">create</i></button>
 	</form>
 </div>
+<button><a href="{{url_for('manage_stock_cards')}}">Back</a></button>
 
 
 

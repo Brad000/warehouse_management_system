@@ -1,7 +1,8 @@
 import os
+import re
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from flask import Flask, render_template, redirect, request, url_for, config
+from flask import Flask, render_template, redirect, request, flash, url_for, config
 from os import path
 if path.exists("env.py"):
     import env
@@ -55,6 +56,21 @@ def update_stock_cards(stock_cards_id):
         'packaging': request.form.get('packaging'),
     })
     return redirect(url_for('manage_stock_cards'))
+
+
+@app.route('/search_stock_card')
+def search_stock_card():
+    """Provides logic for search bar"""
+    orig_query = request.args['query']
+    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
+    results = mongo.db.stock_cards.find({
+        '$or': [
+            {'customer': query},
+            {'product_code': query},
+            {'product_desc': query},
+        ]
+    })
+    return render_template('stockcardsearch.html', query=orig_query, results=results)
 
 
 if __name__ == '__main__':
