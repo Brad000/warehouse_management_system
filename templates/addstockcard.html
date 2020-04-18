@@ -6,7 +6,7 @@
 	<form action="{{ url_for('insert_stock_cards') }}" method="POST" class="col s12">
 		<div class="row">
 			<div class="input-field col s12 m6">
-             <i class="material-icons prefix">supervisor_account</i>
+				<i class="material-icons prefix">supervisor_account</i>
 				<select id="customer" name="customer">
                     <option value="" disabled selected>Customer Code</option>
                     {% for customer in customer %}
@@ -32,8 +32,8 @@
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="units_per_pallet" name="units_per_pallet" type="text" class="validate">
-				<label for="units_per_pallet">Units Per Pallet</label>
+				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate">
+				<label for="unit_per_pallet">Units Per Pallet</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
@@ -45,6 +45,14 @@
 				<input id="packaging" name="packaging" type="text" class="validate">
 				<label for="packaging">Packaging</label>
 			</div>
+            <div class="switch">
+                <label>
+                    <input type="checkbox" checked id="active" name="active" >
+                    <span class="lever"></span>
+                    Active
+                </label>
+            </div>
+
 		</div>
 		<button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="action"><i class="material-icons">add</i></button>
 	</form>

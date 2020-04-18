@@ -9,6 +9,7 @@ if path.exists("env.py"):
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = os.environ.get("MONGO_URI")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
@@ -45,8 +46,8 @@ def edit_stock_cards(stock_cards_id):
 @app.route('/update_stock_cards/<stock_cards_id>', methods=["POST"])
 def update_stock_cards(stock_cards_id):
     stock_cards = mongo.db.stock_cards
-    stock_cards.update({'_id': ObjectId(stock_cards_id)},
-                       {
+    stock_cards.update_one({'_id': ObjectId(stock_cards_id)},
+                           {
         'customer': request.form.get('customer'),
         'product_code': request.form.get('product_code'),
         'product_desc': request.form.get('product_desc'),
@@ -71,6 +72,18 @@ def search_stock_card():
         ]
     })
     return render_template('stockcardsearch.html', query=orig_query, results=results)
+
+
+@app.route('/delist_stock_cards/<stock_cards_id>')
+def delist_stock_cards(stock_cards_id):
+    stock_cards = mongo.db.stock_cards
+    stock_cards.update_one({'_id': ObjectId(stock_cards_id)},
+                           {
+                                "$set": {
+                                            "active": "off"
+                                        }
+                            })
+    return redirect(url_for('manage_stock_cards'))
 
 
 if __name__ == '__main__':
