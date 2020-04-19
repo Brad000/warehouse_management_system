@@ -21,6 +21,12 @@ def manage_stock_cards():
                            stock_cards=mongo.db.stock_cards.find())
 
 
+@app.route('/archive_stock_cards')
+def archive_stock_cards():
+    return render_template("archivestockcard.html",
+                           stock_cards=mongo.db.stock_cards.find())
+
+
 @app.route('/add_stock_cards')
 def add_stock_cards():
     return render_template('addstockcard.html',
@@ -66,7 +72,6 @@ def search_stock_card():
     query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
     results = mongo.db.stock_cards.find({
         '$or': [
-            {'customer': query},
             {'product_code': query},
             {'product_desc': query},
         ]
@@ -83,6 +88,24 @@ def delist_stock_cards(stock_cards_id):
                                             "active": "off"
                                         }
                             })
+    return redirect(url_for('manage_stock_cards'))
+
+
+@app.route('/relist_stock_cards/<stock_cards_id>')
+def relist_stock_cards(stock_cards_id):
+    stock_cards = mongo.db.stock_cards
+    stock_cards.update_one({'_id': ObjectId(stock_cards_id)},
+                           {
+                               "$set": {
+                                            "active": "on"
+                               }
+                           })
+    return redirect(url_for('manage_stock_cards'))
+
+
+@app.route('/delete_stock_cards/<stock_cards_id>')
+def delete_stock_cards(stock_cards_id):
+    mongo.db.stock_cards.remove({'_id': ObjectId(stock_cards_id)})
     return redirect(url_for('manage_stock_cards'))
 
 
