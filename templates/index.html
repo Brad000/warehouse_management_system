@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} {% block content %}
+<h1 class="page-heading">BB Storage Solutions</h1>
+
+  <div class="row">
+      <div class="col s4"><a href="{{ url_for('goods_received') }}" class="waves-effect waves-light btn-large home-button"><i class="material-icons left">cloud</i>Goods Received</a></div>
+      <div class="col s4"><a class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Goods Dispatch</a></div>
+      <div class="col s4"><a class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Stock Search</a></div>
+  </div>
+  <div class="row">
+      <div class="col s4"><a class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Archive</a></div>
+      <div class="col s4"><a href="{{ url_for('manage_stock_cards')}}" class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Manage Stock Cards</a></div>
+      <div class="col s4"><a class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Relocate Stock</a></div>
+ </div>
+
+
+
+
+
+{% endblock %}
