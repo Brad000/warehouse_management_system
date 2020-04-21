@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
 <h3 class="page-heading">Goods Received</h3>
- <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
-  </div>
-
-
-
-
-
-
-
+<div class="row">
+	<form action="{{ url_for('goods_receipt') }}" method="POST" class="col s12">
+		<div class="row">
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">supervisor_account</i>
+				<select id="customer" name="customer">
+                    <option value="" disabled selected>Customer Code</option>
+                    {% for customer in customer %}
+                    <option value="{{customer.customer}}">{{customer.customer}}</option>
+                    {% endfor %}
+                </select>
+				<label>Customer</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">description</i>
+				<input id="product_code" name="product_code" type="text" class="validate">
+				<label for="product_code">Product Code</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">description</i>
+				<input id="delivery_ref" name="delivery_ref" type="text" class="validate">
+				<label for="delivery_ref">Delivery Reference</label>
+			</div>
+			<div class="input-field col s6">
+				<i class="material-icons prefix">edit</i>
+				<input id="bbe" name="bbe" type="text" class="validate">
+				<label for="bbe">Best Before Date: (DD/MM/YYYY)</label>
+			</div>
+			<div class="input-field col s6">
+				<i class="material-icons prefix">edit</i>
+				<input id="quantity" name="quantity" type="text" class="validate">
+				<label for="quantity">Quantity Received</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">edit</i>
+				<input id="location" name="location" type="text" class="validate">
+				<label for="location">Location</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">edit</i>
+				<input type="text" class="datepicker" id="date_received" name="date_received">
+				<label for="date_received">Date Received</label>
+			</div>
+		</div>
+        <button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="action"><i class="material-icons">add</i></button>
+	</form>
+</div>
 {% endblock %}

@@ -22,8 +22,8 @@ def home():
 
 @app.route('/goods_received')
 def goods_received():
-    return render_template("goodsreceived.html")
-
+    customer = mongo.db.customer.find()
+    return render_template("goodsreceived.html", customer=customer)
 
 
 @app.route('/manage_stock_cards')
@@ -118,6 +118,13 @@ def relist_stock_cards(stock_cards_id):
 def delete_stock_cards(stock_cards_id):
     mongo.db.stock_cards.remove({'_id': ObjectId(stock_cards_id)})
     return redirect(url_for('manage_stock_cards'))
+
+
+@app.route('/goods_receipt', methods=['POST'])
+def goods_receipt():
+    goods_receipt = mongo.db.storage
+    goods_receipt.insert_one(request.form.to_dict())
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
