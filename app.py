@@ -48,6 +48,7 @@ def add_stock_cards():
 def insert_stock_cards():
     stock_cards = mongo.db.stock_cards
     stock_cards.insert_one(request.form.to_dict())
+    flash("Stock Card Added")
     return redirect(url_for('manage_stock_cards'))
 
 
@@ -65,14 +66,18 @@ def update_stock_cards(stock_cards_id):
     stock_cards = mongo.db.stock_cards
     stock_cards.update_one({'_id': ObjectId(stock_cards_id)},
                            {
-        'customer': request.form.get('customer'),
-        'product_code': request.form.get('product_code'),
-        'product_desc': request.form.get('product_desc'),
-        'unit_weight': request.form.get('unit_weight'),
-        'unit_per_pallet': request.form.get('unit_per_pallet'),
-        'suppler': request.form.get('supplier'),
-        'packaging': request.form.get('packaging'),
+                               '$set': {
+                                        'customer': request.form.get('customer'),
+                                        'product_code': request.form.get('product_code'),
+                                        'product_desc': request.form.get('product_desc'),
+                                        'unit_weight': request.form.get('unit_weight'),
+                                        'unit_per_pallet': request.form.get('unit_per_pallet'),
+                                        'supplier': request.form.get('supplier'),
+                                        'packaging': request.form.get('packaging'),
+                                        'active': "on"
+                                        }
     })
+    flash("Stock Card Edit Successful")
     return redirect(url_for('manage_stock_cards'))
 
 
@@ -99,6 +104,7 @@ def delist_stock_cards(stock_cards_id):
                                             "active": "off"
                                         }
                             })
+    flash("Stock Card Archived")
     return redirect(url_for('manage_stock_cards'))
 
 
@@ -111,12 +117,14 @@ def relist_stock_cards(stock_cards_id):
                                             "active": "on"
                                }
                            })
+    flash("Stock Card Re-Listed")
     return redirect(url_for('manage_stock_cards'))
 
 
 @app.route('/delete_stock_cards/<stock_cards_id>')
 def delete_stock_cards(stock_cards_id):
     mongo.db.stock_cards.remove({'_id': ObjectId(stock_cards_id)})
+    flash("Stock Card Deleted")
     return redirect(url_for('manage_stock_cards'))
 
 

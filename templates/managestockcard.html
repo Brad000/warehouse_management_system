@@ -17,6 +17,15 @@
 		</div>
 	</form>
     <a href="{{ url_for('archive_stock_cards') }}" class="waves-effect waves-light btn" type="submit">Archive</a>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="alert-warning"><strong>{{ message }}</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </div>
 {% for stock in stock_cards %}
     {% if stock.active == "on" %}
