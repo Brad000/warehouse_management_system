@@ -6,19 +6,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>BB Storage Solutions</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
+
 
 
 </head>
+<header>
+	<ul id="slide-out" class="sidenav">
+        <li><h5 class="page-heading">BB Storage Solutions</h5></li>
+        <hr>
+        <li><a class="waves-effect" href="{{ url_for('home') }}"><i class="material-icons">home</i>Home</a></li>
+		<li><a class="waves-effect" href="{{ url_for('goods_received') }}"><i class="material-icons">input</i>Goods Received</a></li>
+         <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Stock Cards<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{{ url_for('manage_stock_cards') }}">Manage Stock Cards</a></li>
+                <li><a href="{{ url_for('add_stock_cards') }}">Create Stock Cards</a></li>
+                <li><a href="{{ url_for('archive_stock_cards') }}">Stock Card Archive</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+	</ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><button>Menu</button></a>
+</header>
 
 <body>
 	<div class="container">
 		{% block content %} {% endblock %}
 	</div>
-    <script src="https://kit.fontawesome.com/5655c570e1.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/5655c570e1.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script type="text/javascript">
@@ -26,6 +49,8 @@
              $('.datepicker').datepicker();
              $('select').formSelect();
              $('.modal').modal();
+             $('.sidenav').sidenav();
+             $('.collapsible').collapsible();
   });
     
   
