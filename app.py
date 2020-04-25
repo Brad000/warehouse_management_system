@@ -135,6 +135,25 @@ def goods_receipt():
     return redirect(url_for('home'))
 
 
+@app.route('/stock_search')
+def stock_search():
+    return render_template('stocksearch.html')
+
+
+@app.route('/stock_search_results')
+def stock_search_results():
+    """Provides logic for search bar"""
+    orig_query = request.args['query']
+    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
+    results = mongo.db.storage.find({
+        '$or': [
+            {'product_code': query},
+            {'delivery_ref': query},
+        ]
+    })
+    return render_template('stocksearch.html', query=orig_query, results=results)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

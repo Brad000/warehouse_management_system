@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} {% block content %}
+<h3 class="page-heading">Current Stock Search</h3>
+
+<div class="row">
+	<form class="col s12" action="{{ url_for('stock_search_results') }}">
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">search</i>
+				<input class="validate" type="text" name="query">
+				<label for="stock_search_results">Product Code</label>
+			</div>
+		</div>
+		<a><button class="btn waves-effect waves-light modal-trigger" href="#searchmodal" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button></a>
+	</form>
+</div>
+{% for stock in results %}
+    <div id="searchmodal" class="modal">
+	    <div class="modal-content">
+		    <p>{{ stock.product_code }}</p>
+		    <p>{{ stock.quantity }}</p>
+	    </div>
+	    <div class="modal-footer">
+		    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+	    </div>
+    </div>
+{% endfor %}
+
+
+
+{% endblock %}
