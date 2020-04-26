@@ -5,6 +5,15 @@
 <h1>Welcome</h1>
 <hr>
 <h3>Please Log In</h3>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="alert-warning"><strong>{{ message }}</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
 
 

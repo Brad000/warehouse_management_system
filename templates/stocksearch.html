@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h3 class="page-heading">Current Stock Search</h3>
+<h3 class="page-heading">Stock Control</h3>
 
 <div class="row">
 	<form class="col s12" action="{{ url_for('stock_search_results') }}">
 		<div class="row">
 			<div class="input-field col s12">
 				<i class="material-icons prefix">search</i>
-				<input class="validate" type="text" name="query">
-				<label for="stock_search_results">Product Code</label>
+				<input class="validate" type="text" name="query" required>
+				<label for="stock_search_results">Product Code / Delivery Reference</label>
 			</div>
 		</div>
-		<a><button class="btn waves-effect waves-light modal-trigger" href="#searchmodal" type="submit" name="action">Submit
+		<a><button class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button></a>
 	</form>
 </div>
 {% for stock in results %}
-    <div id="searchmodal" class="modal">
-	    <div class="modal-content">
-		    <p>{{ stock.product_code }}</p>
-		    <p>{{ stock.quantity }}</p>
-	    </div>
-	    <div class="modal-footer">
-		    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-	    </div>
-    </div>
+<div class="row">
+	<ul class="collapsible">
+		<li>
+			<div class="collapsible-header"><i class="material-icons">expand_more</i>{{ stock.delivery_ref }}</div>
+			<div class="collapsible-body">
+				<p>Product Code: {{ stock.product_code }}</p>
+				<p>Best Before Date: {{ stock.bbe }}</p>
+				<p>Quantity: {{ stock.quantity }}</p>
+				<p>Location: {{ stock.location }}</p>
+				<p>Customer: {{ stock.customer }}</p>
+			    <a href="" class="waves-effect waves-light btn green"><i class="material-icons left">edit</i>Edit</a>
+                <a class="waves-effect waves-light btn red"><i class="material-icons left">local_shipping</i>Dispatch Goods</a> 
+			</div>
+		</li>
+	</ul>
+</div>
 {% endfor %}
-
+<a href="{{ url_for('stock_search') }}"><button class="btn waves-effect waves-light">Clear</button></a>
 
 
 {% endblock %}
