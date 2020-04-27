@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
 <h3 class="page-heading">Stock Control</h3>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="alert-warning"><strong>{{ message }}</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
 <div class="row">
 	<form class="col s12" action="{{ url_for('stock_search_results') }}">
@@ -23,11 +32,16 @@
 			<div class="collapsible-header"><i class="material-icons">expand_more</i>{{ stock.delivery_ref }}</div>
 			<div class="collapsible-body">
 				<p>Product Code: {{ stock.product_code }}</p>
+            {% for info in stock_cards %}
+            {% if stock.product_code == info.product_code %}
+                <p>{{ info.product_desc }}</p>
+            {% endif %} 
+            {% endfor %}  
 				<p>Best Before Date: {{ stock.bbe }}</p>
 				<p>Quantity: {{ stock.quantity }}</p>
 				<p>Location: {{ stock.location }}</p>
-				<p>Customer: {{ stock.customer }}</p>
-			    <a href="" class="waves-effect waves-light btn green"><i class="material-icons left">edit</i>Edit</a>
+				<p>Customer: {{ stock.customer }}</p> 
+			    <a href="{{ url_for('edit_stock', storage_id=stock._id ) }}" class="waves-effect waves-light btn green"><i class="material-icons left">edit</i>Edit</a>
                 <a class="waves-effect waves-light btn red"><i class="material-icons left">local_shipping</i>Dispatch Goods</a> 
 			</div>
 		</li>

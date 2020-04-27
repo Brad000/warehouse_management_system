@@ -17,7 +17,6 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/home')
 def home():
-    flash("Delivery Receipted")
     return render_template("index.html")
 
 
@@ -133,6 +132,7 @@ def delete_stock_cards(stock_cards_id):
 def goods_receipt():
     goods_receipt = mongo.db.storage
     goods_receipt.insert_one(request.form.to_dict())
+    flash("Delivery Receipted")
     return redirect(url_for('home'))
 
 
@@ -146,13 +146,42 @@ def stock_search_results():
     """Provides logic for search bar"""
     orig_query = request.args['query']
     query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
+    stock_cards = mongo.db.stock_cards.find()
     results = mongo.db.storage.find({
         '$or': [
             {'product_code': query},
             {'delivery_ref': query},
         ]
     })
-    return render_template('stocksearch.html', query=orig_query, results=results)
+    return render_template('stocksearch.html',
+                           query=orig_query, results=results, stock_cards=stock_cards)
+
+
+@app.route('/edit_stock/<storage_id>')
+def edit_stock(storage_id):
+    stock = mongo.db.storage.find_one({"_id": ObjectId
+                                        (storage_id)})
+    customer = mongo.db.customer.find()
+    return render_template('editstock.html', customer=customer, storage=stock)
+
+
+@app.route('/update_stock/<storage_id>', methods=["POST"])
+def update_stock(storage_id):
+    stock = mongo.db.storage
+    stock.update_one({'_id': ObjectId(storage_id)},
+                     {
+                        '$set': {
+                                    'customer': request.form.get('customer'),
+                                    'product_code': request.form.get('product_code'),
+                                    'delivery_ref': request.form.get('delivery_ref'),
+                                    'bbe': request.form.get('bbe'),
+                                    'quantity': request.form.get('quantity'),
+                                    'location': request.form.get('location'),
+                                    'date_received': request.form.get('date_received')
+                                }
+    })
+    flash("Stock Receipt Edit Successfully")
+    return redirect(url_for('stock_search'))
 
 
 if __name__ == '__main__':
