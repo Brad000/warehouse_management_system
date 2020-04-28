@@ -16,8 +16,13 @@
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">description</i>
-				<input id="product_code" name="product_code" type="text" class="validate">
-				<label for="product_code">Product Code</label>
+				<select id="product_code" name="product_code">
+                    <option value="" disabled selected>Select Product Code</option>
+                    {% for product in product %}
+                    <option value="{{product.product_code}}">{{product.product_code}}</option>
+                    {% endfor %}
+                </select>
+				<label>Customer</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>

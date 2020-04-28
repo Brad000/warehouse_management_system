@@ -23,7 +23,8 @@ def home():
 @app.route('/goods_received')
 def goods_received():
     customer = mongo.db.customer.find()
-    return render_template("goodsreceived.html", customer=customer)
+    product = mongo.db.stock_cards.find()
+    return render_template("goodsreceived.html", customer=customer, product=product)
 
 
 @app.route('/manage_stock_cards')
@@ -149,6 +150,7 @@ def stock_search_results():
     stock_cards = mongo.db.stock_cards.find()
     results = mongo.db.storage.find({
         '$or': [
+            {'customer': query},
             {'product_code': query},
             {'delivery_ref': query},
         ]
@@ -159,10 +161,12 @@ def stock_search_results():
 
 @app.route('/edit_stock/<storage_id>')
 def edit_stock(storage_id):
+    product = mongo.db.stock_cards.find()
     stock = mongo.db.storage.find_one({"_id": ObjectId
-                                        (storage_id)})
+                                      (storage_id)})
     customer = mongo.db.customer.find()
-    return render_template('editstock.html', customer=customer, storage=stock)
+    return render_template('editstock.html', customer=customer, storage=stock,
+                           product=product)
 
 
 @app.route('/update_stock/<storage_id>', methods=["POST"])
@@ -181,6 +185,29 @@ def update_stock(storage_id):
                                 }
     })
     flash("Stock Receipt Edit Successfully")
+    return redirect(url_for('stock_search'))
+
+
+@app.route('/relocation/<storage_id>')
+def relocation(storage_id):
+    product = mongo.db.stock_cards.find()
+    stock = mongo.db.storage.find_one({"_id": ObjectId
+                                      (storage_id)})
+    customer = mongo.db.customer.find()
+    return render_template('relocatestock.html', customer=customer, storage=stock,
+                           product=product)
+
+
+@app.route('/relocate_stock/<storage_id>', methods=["POST"])
+def relocate_stock(storage_id):
+    stock = mongo.db.storage
+    stock.update_one({'_id': ObjectId(storage_id)},
+                     {
+                        '$set': {
+                                    'location': request.form.get('location'),
+                                }
+    })
+    flash("Stock Relocated")
     return redirect(url_for('stock_search'))
 
 
