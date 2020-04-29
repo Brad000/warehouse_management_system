@@ -22,7 +22,7 @@
                     <option value="{{product.product_code}}">{{product.product_code}}</option>
                     {% endfor %}
                 </select>
-				<label>Customer</label>
+				<label>Product Code</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
@@ -50,7 +50,20 @@
 				<label for="date_received">Date Received</label>
 			</div>
 		</div>
-        <a><button class="btn waves-effect waves-light green" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a> 
+		<a><button class="btn waves-effect waves-light green" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a>
+
+		<div class="switch hide">
+			<label>
+                    <input type="checkbox" id="dispatched" name="dispatched" checked>
+                    <span class="lever"></span>
+                    On
+                </label>
+		</div>
+		<div class="input-field col s12 m6 hide">
+			<i class="material-icons prefix">edit</i>
+			<input type="text" class="datepicker" id="date_dispatched" name="date_dispatched">
+			<label for="date_received">Date Dispatched</label>
+		</div>
 	</form>
 </div>
 {% endblock %}

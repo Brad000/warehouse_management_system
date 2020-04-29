@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} {% block content %}
+<h3 class="page-heading">Relocation</h3>
+<div class="row">
+	<form action="{{ url_for('dispatch_stock', storage_id=storage._id ) }}" method="POST" class="col s12">
+		<div class="row">
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">supervisor_account</i>
+				<select id="customer" name="customer">
+                    <option value="" disabled selected>Customer Code</option>
+                    {% for customer in customer %}
+                        {% if customer.customer == storage.customer %}
+                    <option value="{{customer.customer}}" selected disabled>{{customer.customer}}</option>
+                        {% else %}
+                    <option value="{{customer.customer}}" disabled>{{customer.customer}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+				<label>Customer</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">description</i>
+				<select id="product_code" name="product_code">
+                    <option value="" disabled selected>Select Product Code</option>
+                    {% for product in product %}
+                        {% if product.product_code == storage.product_code %}
+                    <option value="{{product.product_code}}" selected disabled>{{product.product_code}}</option>
+                        {% else %}
+                    <option value="{{product.product_code}}" disabled>{{product.product_code}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+				<label>Product Code</label>
+			</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">description</i>
+				<input id="delivery_ref" name="delivery_ref" type="text" class="validate" value="{{ storage.delivery_ref }}" disabled>
+				<label for="delivery_ref">Delivery Reference</label>
+			</div>
+			<div class="input-field col s6">
+				<i class="material-icons prefix">edit</i>
+				<input id="bbe" name="bbe" type="text" class="validate" value="{{ storage.bbe }}" disabled>
+				<label for="bbe">Best Before Date: (DD/MM/YYYY)</label>
+			</div>
+			<div class="input-field col s6">
+				<i class="material-icons prefix">edit</i>
+				<input id="quantity" name="quantity" type="text" class="validate" value="{{ storage.quantity }}" disabled>
+				<label for="quantity">Quantity Received</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">edit</i>
+				<input id="location" name="location" type="text" class="validate" value="{{ storage.location }}" disabled>
+				<label for="location">Location</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<i class="material-icons prefix">edit</i>
+				<input type="text" class="datepicker" id="date_dispatched" name="date_dispatched" value="{{ storage.date_dispatched }}">
+				<label for="date_received">Date Dispatched</label>
+			</div>
+		</div>
+        <a><button class="btn waves-effect waves-light green" type="submit" name="action"><i class="material-icons left">local_shipping</i>Dispatch</button></a> 
+	</form>
+</div>
+{% endblock %}

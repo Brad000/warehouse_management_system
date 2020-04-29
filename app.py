@@ -211,6 +211,30 @@ def relocate_stock(storage_id):
     return redirect(url_for('stock_search'))
 
 
+@app.route('/dispatch_stock/<storage_id>', methods=["POST"])
+def dispatch_stock(storage_id):
+    stock = mongo.db.storage
+    stock.update_one({'_id': ObjectId(storage_id)},
+                     {
+                       "$set": {
+                                  "date_dispatched": request.form.get('date_dispatched'),
+                                  "in_stock": "off"
+                                }
+                            })
+    flash("Stock Dispatched")
+    return redirect(url_for('stock_search'))
+
+
+@app.route('/dispatch/<storage_id>')
+def dispatch(storage_id):
+    product = mongo.db.stock_cards.find()
+    stock = mongo.db.storage.find_one({"_id": ObjectId
+                                      (storage_id)})
+    customer = mongo.db.customer.find()
+    return render_template('dispatch.html', customer=customer, storage=stock,
+                           product=product)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
