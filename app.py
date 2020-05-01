@@ -87,11 +87,10 @@ def update_stock_cards(stock_cards_id):
 def search_stock_card():
     """Provides logic for search bar"""
     orig_query = request.args['query']
-    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
     results = mongo.db.stock_cards.find({
         '$or': [
-            {'product_code': query},
-            {'product_desc': query},
+            {'product_code': re.compile(orig_query, re.IGNORECASE)},
+            {'product_desc': re.compile(orig_query, re.IGNORECASE)},
         ]
     })
     return render_template('stockcardsearch.html', query=orig_query, results=results)
@@ -147,13 +146,12 @@ def stock_search():
 def stock_search_results():
     """Provides logic for search bar"""
     orig_query = request.args['query']
-    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
     stock_cards = mongo.db.stock_cards.find()
     results = mongo.db.storage.find({
         '$or': [
-            {'customer': query},
-            {'product_code': query},
-            {'delivery_ref': query},
+            {'customer': re.compile(orig_query, re.IGNORECASE)},
+            {'product_code': re.compile(orig_query, re.IGNORECASE)},
+            {'delivery_ref': re.compile(orig_query, re.IGNORECASE)},
         ]
     })
     return render_template('stocksearch.html',
@@ -185,7 +183,7 @@ def update_stock(storage_id):
                                     'date_received': request.form.get('date_received')
                                 }
     })
-    flash("Stock Receipt Edit Successfully")
+    flash("Stock Receipt Edit Successful")
     return redirect(url_for('stock_search'))
 
 
@@ -234,6 +232,25 @@ def dispatch(storage_id):
     customer = mongo.db.customer.find()
     return render_template('dispatch.html', customer=customer, storage=stock,
                            product=product)
+
+
+@app.route('/stock_archive')
+def stock_archive():
+    return render_template("stockarchive.html")
+
+
+@app.route('/archive_search_results')
+def archive_search_results():
+    """Provides logic for search bar"""
+    orig_query = request.args['query']
+    stock_cards = mongo.db.stock_cards.find()
+    results = mongo.db.storage.find({
+        '$or': [
+            {'product_code': re.compile(orig_query, re.IGNORECASE)},
+        ]
+    })
+    return render_template('stockarchive.html',
+                           query=orig_query, results=results, stock_cards=stock_cards)
 
 
 if __name__ == '__main__':
