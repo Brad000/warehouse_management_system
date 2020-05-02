@@ -253,6 +253,13 @@ def archive_search_results():
                            query=orig_query, results=results, stock_cards=stock_cards)
 
 
+@app.route('/delete_stock/<storage_id>')
+def delete_stock(storage_id):
+    mongo.db.storage.remove({'_id': ObjectId(storage_id)})
+    flash("Stock Deleted")
+    return redirect(url_for('stock_search'))
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
