@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
 {% with messages = get_flashed_messages() %}
-	{% if messages %}
-	<ul>
-		{% for message in messages %}
-		<li class="alert-warning"><strong>{{ message }}</strong></li>
-		{% endfor %}
-	</ul>
-	{% endif %}
+{% if messages %}
+<ul>
+	{% for message in messages %}
+	<li class="alert-warning"><strong>{{ message }}</strong></li>
+	{% endfor %}
+</ul>
+{% endif %}
 {% endwith %}
 <div>
-{% if 'username' in session %}
-    <div class="text-light font-italic bg-dark pt-2 pr-4 text-center">Hello, {{ session['username'] }}</div>
-{% else %}
-    <div class="text-light font-italic bg-dark pt-2 pr-4 text-center">please <a href="{{ url_for('login') }}">login</a>
-        or <a href="{{ url_for('register') }}">register</a>.
-    </div>
-{% endif %}
-	<h1>Welcome</h1>
-	<hr>
-	<h3>Please Login / Register</h3>
-	<a href="{{url_for('login')}}"
-		class="waves-effect waves-light btn blue"><i class="material-icons left">local_shipping</i>Login !!</a>
-	<a href="{{url_for('register')}}"
-		class="waves-effect waves-light btn pink"><i class="material-icons left">local_shipping</i>Register</a>
-    <a href="{{url_for('logout')}}"
-		class="waves-effect waves-light btn pink"><i class="material-icons left">local_shipping</i>Logout</a>
+	{% if 'username' in session %}
+	<div class="text-light font-italic bg-dark pt-2 pr-4 text-center">Logged in as: {{ session['username'] }}  ({{ session['usertype']}})
+	{% else %}
+	<div class="text-light font-italic bg-dark pt-2 pr-4 text-center">Please <a href="{{ url_for('login') }}">Login</a>
+		to begin, or <a href="{{ url_for('register') }}">register</a> for an account.
+	</div>
 </div>
+{% endif %}
+{% if 'username' in session %}
+<div>
+	<h2>Welcome Back, {{ session['username']}}</h2>
+	<br>
+	    <h5>System Updates</h5>
+	        <ol>
+                <li>Stock Card Re-list - Re-list any previously archived stock cards at a click of a button</li>
+                <li>Archive Stock Search - futher create history reports with the ability to search through the archives of previously dispatched goods</li>
+            </ol>
+</div>
+<div>
+    <h5>Customer Support</h5>
+        <p>Your dedicated account support team</p>
+        <p>Phone: 01994 432001</p>
+        <p>Email: bbaccountsupport@mail.com</p>
+</div>
+{% else %}
+<h2>Welcome To BB Storage Solutions</h2>
+<hr>
+<p>Our dynamic warehouse management system tool, to help you push your business ahead of your competitors, our ever
+	improving systems are built around you and your needs to provide first class solutions to all your problems</p>
 
+<p>For more products or infomation please visit our website<a href="https://brad000.github.io/Resume-project/"
+		target="_blank"> www.bbstoragesolutions.co.uk</a></p>
 
+<p>If you already have an account with us or are looking to sign up please use the <a
+		href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a> links provided.
+</p>
+{% endif %}
 
+</div>
 {% endblock %}

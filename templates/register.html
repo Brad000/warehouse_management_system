@@ -41,8 +41,12 @@
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.remember_me() }} {{ form.remember_me.label }}
+         <p>
+            {{ form.usertype.label }}<br>
+            {{ form.usertype(size=32) }}<br>
+            {% for error in form.usertype.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>

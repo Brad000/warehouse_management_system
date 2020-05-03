@@ -20,7 +20,8 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("index.html")
+    users = mongo.db.users.find()
+    return render_template("index.html", users=users)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -36,13 +37,15 @@ def login():
         # get all users
         users = mongo.db.users
         # try and get one with same name as entered
-        db_user = users.find_one({'name': request.form['username']})
+        db_user = users.find_one({'name': request.form['username'],
+                                  'usertype': request.form['usertype']})
 
         if db_user:
             # check password using hashing
             if bcrypt.hashpw(request.form['password'].encode('utf-8'),
                              db_user['password']) == db_user['password']:
                 session['username'] = request.form['username']
+                session['usertype'] = request.form['usertype']
                 session['logged_in'] = True
                 # successful redirect to home logged in
                 return redirect(url_for('home', title="Login", form=form))
@@ -73,9 +76,11 @@ def register():
             hash_pass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # insert the user to DB
             users.insert_one({'name': request.form['username'],
-                          'password': hash_pass,
-                          'email': request.form['email']})
+                              'password': hash_pass,
+                              'email': request.form['email'],
+                              'usertype': request.form['usertype']})
             session['username'] = request.form['username']
+            session['usertype'] = request.form['usertype']
             return redirect(url_for('home'))
         # duplicate username set flash message and reload page
         flash('Sorry, that username is already taken - use another')
