@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-
-  
-<h1>Welcome</h1>
-<hr>
-<h3>Please Log In</h3>
-  {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li class="alert-warning"><strong>{{ message }}</strong></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+		<li class="alert-warning"><strong>{{ message }}</strong></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+{% endwith %}
+<div>
+{% if 'username' in session %}
+    <div class="text-light font-italic bg-dark pt-2 pr-4 text-center">Hello, {{ session['username'] }}</div>
+{% else %}
+    <div class="text-light font-italic bg-dark pt-2 pr-4 text-center">please <a href="{{ url_for('login') }}">login</a>
+        or <a href="{{ url_for('register') }}">register</a>.
+    </div>
+{% endif %}
+	<h1>Welcome</h1>
+	<hr>
+	<h3>Please Login / Register</h3>
+	<a href="{{url_for('login')}}"
+		class="waves-effect waves-light btn blue"><i class="material-icons left">local_shipping</i>Login !!</a>
+	<a href="{{url_for('register')}}"
+		class="waves-effect waves-light btn pink"><i class="material-icons left">local_shipping</i>Register</a>
+    <a href="{{url_for('logout')}}"
+		class="waves-effect waves-light btn pink"><i class="material-icons left">local_shipping</i>Logout</a>
+</div>
 
 
 
