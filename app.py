@@ -24,6 +24,11 @@ def home():
     return render_template("index.html", users=users)
 
 
+@app.route('/template')
+def template():
+    return render_template("template.html")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Login handler"""

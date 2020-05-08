@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">supervisor_account</i>
-				<select id="customer" name="customer">
+				<select id="customer" name="customer" required>
                     <option value="" disabled selected>Customer Code</option>
                     {% for customer in customer %}
                     <option value="{{customer.customer}}">{{customer.customer}}</option>
@@ -17,32 +17,32 @@
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="product_code" name="product_code" type="text" class="validate">
+				<input id="product_code" name="product_code" type="text" class="validate" required>
 				<label for="product_code">Product Code</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="product_desc" name="product_desc" type="text" class="validate">
+				<input id="product_desc" name="product_desc" type="text" class="validate" required>
 				<label for="product_desc">Product Description</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_weight" name="unit_weight" type="text" class="validate">
+				<input id="unit_weight" name="unit_weight" type="text" class="validate" required>
 				<label for="unit_weight">Unit Weight</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate">
+				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate" required>
 				<label for="unit_per_pallet">Units Per Pallet</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="supplier" name="supplier" type="text" class="validate">
+				<input id="supplier" name="supplier" type="text" class="validate" required>
 				<label for="supplier">Supplier</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="packaging" name="packaging" type="text" class="validate">
+				<input id="packaging" name="packaging" type="text" class="validate" required>
 				<label for="packaging">Packaging</label>
 			</div>
             <div class="switch">

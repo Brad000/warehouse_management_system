@@ -14,6 +14,7 @@
 				<span class="card-title">{{stock.product_code}}</span>
 				<p>{{stock.customer}}</p>
 				<p>{{stock.product_desc}}</p>
+                {% if session['usertype'] == 'manager' %}
 				<div class="card-action sc-button-div">
 					<a href="{{url_for('relist_stock_cards', stock_cards_id=stock._id )}}"
 						class="btn-floating btn waves-effect waves-light green sc-button"><i class="material-icons">unarchive</i></a>
@@ -30,6 +31,7 @@
 							<a href="{{url_for('delete_stock_cards', stock_cards_id=stock._id )}}" class="modal-close waves-effect waves-green black btn">Delete</a>
 						</div>
 					</div>
+                    {% endif %}
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="input-field col s12 m6">
              <i class="material-icons prefix">supervisor_account</i>
-				<select id="customer" name="customer">
+				<select id="customer" name="customer" required>
                     <option value="" disabled selected>Customer Code</option>
                     {% for customer in customer %}
                         {% if customer.customer == stock_cards.customer %}
@@ -20,32 +20,32 @@
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="product_code" name="product_code" type="text" class="validate" value="{{ stock_cards.product_code}}">
+				<input id="product_code" name="product_code" type="text" class="validate" value="{{ stock_cards.product_code}}" required>
 				<label for="product_code">Product Code</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="product_desc" name="product_desc" type="text" class="validate" value="{{stock_cards.product_desc}}">
+				<input id="product_desc" name="product_desc" type="text" class="validate" value="{{stock_cards.product_desc}}" required>
 				<label for="product_desc">Product Description</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_weight" name="unit_weight" type="text" class="validate" value="{{stock_cards.unit_weight}}">
+				<input id="unit_weight" name="unit_weight" type="text" class="validate" value="{{stock_cards.unit_weight}}" required>
 				<label for="unit_weight">Unit Weight</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate" value="{{stock_cards.unit_per_pallet}}">
+				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate" value="{{stock_cards.unit_per_pallet}}" required>
 				<label for="unit_per_pallet">Units Per Pallet</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="supplier" name="supplier" type="text" class="validate" value="{{stock_cards.supplier}}">
+				<input id="supplier" name="supplier" type="text" class="validate" value="{{stock_cards.supplier}}" required>
 				<label for="supplier">Supplier</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="packaging" name="packaging" type="text" class="validate" value="{{stock_cards.packaging}}">
+				<input id="packaging" name="packaging" type="text" class="validate" value="{{stock_cards.packaging}}" required>
 				<label for="packaging">Packaging</label>
 			</div>
 		</div>

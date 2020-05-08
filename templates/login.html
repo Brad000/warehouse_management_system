@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% block content %}
-    <h1>Sign In</h1>
+    <h1 class="teal-text">Sign In</h1>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
                 {% for message in messages %}
-                    <li class="alert-warning">{{ message }}</li>
+                    <li class="alert-warning white-text"><strong>{{ message }}</strong></li>
                 {% endfor %}
             </ul>
         {% endif %}
@@ -14,27 +14,28 @@
     <form action="" method="post">
         {{ form.csrf_token }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
+            <strong>{{ form.username.label(class='teal-text') }}</strong><br>
+            {{ form.username(size=32, class='white-text')}}<br>
             {% for error in form.username.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
+            <strong>{{ form.password.label(class='teal-text') }}</strong><br>
+            {{ form.password(size=32, class='white-text') }}<br>
             {% for error in form.password.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
          <p>
-            {{ form.usertype.label }}<br>
-            {{ form.usertype(size=32) }}<br>
+            <strong>{{ form.usertype.label(class='teal-text') }}</strong><br>
+            {{ form.usertype(size=32, class='white-text') }}<br>
             {% for error in form.usertype.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ form.submit(class='white-text black') }}</p>
+        
     </form>
-    <p>Not registered? Then please <a href="{{ url_for('register') }}">register here</a></p>
+    <p class="teal-text">Not registered? Then please <a class="white-text" href="{{ url_for('register') }}">register here!</a></p>
 {% endblock %}

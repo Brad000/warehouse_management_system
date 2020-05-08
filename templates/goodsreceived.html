@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">supervisor_account</i>
-				<select id="customer" name="customer">
+				<select id="customer" name="customer" required>
                     <option value="" disabled selected>Customer Code</option>
                     {% for customer in customer %}
                     <option value="{{customer.customer}}">{{customer.customer}}</option>
@@ -16,37 +16,39 @@
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">description</i>
-				<select id="product_code" name="product_code">
+				<select id="product_code" name="product_code" required>
                     <option value="" disabled selected>Select Product Code</option>
                     {% for product in product %}
+                    {% if product.active == 'on' %}
                     <option value="{{product.product_code}}">{{product.product_code}}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
 				<label>Product Code</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="delivery_ref" name="delivery_ref" type="text" class="validate">
+				<input id="delivery_ref" name="delivery_ref" type="text" class="validate" required>
 				<label for="delivery_ref">Delivery Reference</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="bbe" name="bbe" type="text" class="validate">
+				<input id="bbe" name="bbe" type="text" class="validate" required>
 				<label for="bbe">Best Before Date: (DD/MM/YYYY)</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="quantity" name="quantity" type="text" class="validate">
+				<input id="quantity" name="quantity" type="text" class="validate" required>
 				<label for="quantity">Quantity Received</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="location" name="location" type="text" class="validate">
+				<input id="location" name="location" type="text" class="validate" required>
 				<label for="location">Location</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input type="text" class="datepicker" id="date_received" name="date_received">
+				<input type="text" class="datepicker" id="date_received" name="date_received" required>
 				<label for="date_received">Date Received</label>
 			</div>
 		</div>
@@ -54,7 +56,7 @@
 
 		<div class="switch hide">
 			<label>
-                    <input type="checkbox" id="dispatched" name="dispatched" checked>
+                    <input type="checkbox" id="in_stock" name="in_stock" checked>
                     <span class="lever"></span>
                     On
                 </label>

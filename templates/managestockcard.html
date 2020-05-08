@@ -36,6 +36,10 @@
 				<span class="card-title">{{stock.product_code}}</span>
 				<p>{{stock.customer}}</p>
 				<p>{{stock.product_desc}}</p>
+                <p>Weight - {{stock.unit_weight}}</p>
+                <p>Per Pallet - {{stock.unit_per_pallet}}</p>
+                <p>Supplier - {{stock.supplier}}</p>
+                <p>Packaging - {{stock.packaging}}</p>
 				<div class="card-action sc-button-div">
 					<a href="{{url_for('edit_stock_cards', stock_cards_id=stock._id )}}"
 						class="btn-floating btn waves-effect waves-light green sc-button"><i class="material-icons">edit</i></a>

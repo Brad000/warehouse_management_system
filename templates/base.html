@@ -13,64 +13,64 @@
 
 
 </head>
-<header>
+<header >
 	{% if 'username' in session %}
-	<ul id="slide-out" class="sidenav">
+	<ul id="slide-out" class="sidenav teal-text black">
 		<li>
 			<h5 class="page-heading">BB Storage Solutions</h5>
 		</li>
 		<hr>
-		<li><a class="waves-effect" href="{{ url_for('home') }}"><i class="material-icons">home</i>Home</a></li>
-		<li><a class="waves-effect" href="{{ url_for('goods_received') }}"><i class="material-icons">input</i>Goods
+		<li><a class="waves-effect teal-text" href="{{ url_for('home') }}"><i class="material-icons teal-text">home</i>Home</a></li>
+		<li><a class="waves-effect teal-text" href="{{ url_for('goods_received') }}"><i class="material-icons teal-text">input</i>Goods
 				Received</a></li>
 		{% if session['usertype'] == 'warehouse' %}
-		<li class="hide"><a class="waves-effect"
-				href="{{ url_for('stock_search') }}"><i class="material-icons">search</i>Stock Control</a></li>
-		<li class="hide"><a class="waves-effect"
-				href="{{ url_for('stock_archive') }}"><i class="material-icons">archive</i>Stock Archive</a></li>
+		<li class="hide"><a class="waves-effect teal-text"
+				href="{{ url_for('stock_search') }}"><i class="material-icons teal-text">search</i>Stock Control</a></li>
+		<li class="hide"><a class="waves-effect teal-text"
+				href="{{ url_for('stock_archive') }}"><i class="material-icons teal-text">archive</i>Stock Archive</a></li>
 		<li class="no-padding">
 			<ul class="collapsible collapsible-accordion hide">
 				<li>
-					<a class="collapsible-header">Stock Cards<i class="material-icons">arrow_drop_down</i></a>
+					<a class="collapsible-header teal-text">Stock Cards<i class="material-icons teal-text">arrow_drop_down</i></a>
 					<div class="collapsible-body">
-						<ul>
-							<li><a href="{{ url_for('manage_stock_cards') }}">Manage Stock Cards</a></li>
-							<li><a href="{{ url_for('add_stock_cards') }}">Create Stock Cards</a></li>
-							<li><a href="{{ url_for('archive_stock_cards') }}">Stock Card Archive</a></li>
+						<ul class="black">
+							<li><a class="teal-text" href="{{ url_for('manage_stock_cards') }}">Manage Stock Cards</a></li>
+							<li><a class="teal-text" href="{{ url_for('add_stock_cards') }}">Create Stock Cards</a></li>
+							<li><a class="teal-text" href="{{ url_for('archive_stock_cards') }}">Stock Card Archive</a></li>
 						</ul>
 					</div>
 				</li>
 			</ul>
 			{% else %}
-		<li><a class="waves-effect" href="{{ url_for('stock_search') }}"><i class="material-icons">search</i>Stock
+		<li><a class="waves-effect teal-text" href="{{ url_for('stock_search') }}"><i class="material-icons teal-text">search</i>Stock
 				Control</a></li>
-		<li><a class="waves-effect" href="{{ url_for('stock_archive') }}"><i class="material-icons">archive</i>Stock
+		<li><a class="waves-effect teal-text" href="{{ url_for('stock_archive') }}"><i class="material-icons teal-text">archive</i>Stock
 				Archive</a></li>
 		<li class="no-padding">
 			<ul class="collapsible collapsible-accordion">
 				<li>
-					<a class="collapsible-header">Stock Cards<i class="material-icons">arrow_drop_down</i></a>
+					<a class="collapsible-header teal-text">Stock Cards<i class="material-icons teal-text">arrow_drop_down</i></a>
 					<div class="collapsible-body">
-						<ul>
-							<li><a href="{{ url_for('manage_stock_cards') }}">Manage Stock Cards</a></li>
-							<li><a href="{{ url_for('add_stock_cards') }}">Create Stock Cards</a></li>
-							<li><a href="{{ url_for('archive_stock_cards') }}">Stock Card Archive</a></li>
+						<ul class="black">
+							<li><a class="teal-text" href="{{ url_for('manage_stock_cards') }}">Manage Stock Cards</a></li>
+							<li><a class="teal-text" href="{{ url_for('add_stock_cards') }}">Create Stock Cards</a></li>
+							<li><a class="teal-text" href="{{ url_for('archive_stock_cards') }}">Stock Card Archive</a></li>
 						</ul>
 					</div>
 				</li>
 			</ul>
 			{% endif %}
 		</li>
-		    <li class="text-light font-italic bg-dark pt-2 pr-4 text-center"><a href="{{ url_for('logout') }}">Logout</a>
+		    <li class="text-light font-italic bg-dark pt-2 pr-4 text-center"><a class="teal-text" href="{{ url_for('logout') }}">Logout</a>
 		    </li>
 		</li>
 	</ul>
-	<a href="#" data-target="slide-out" class="sidenav-trigger"><button>Menu</button></a>
+	<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="menu material-icons teal-text">menu</i></a>
 
 	{% endif %}
 </header>
 
-<body>
+<body class="black">
 	<div class="container">
 		{% block content %} {% endblock %}
 	</div>

@@ -42,6 +42,7 @@
 				<p>Best Before Date: {{ stock.bbe }}</p>
 				<p>Quantity: {{ stock.quantity }}</p>
 				<p>Customer: {{ stock.customer }}</p>
+                {% if session['usertype'] == 'warehouse' %}
 				<!-- Modal Trigger -->
 					<a class="btn-floating btn waves-effect waves-light red sc-button modal-trigger" href="#delete_stock_modal"><i class="material-icons">delete</i></a>
 					<!-- Modal Structure -->
@@ -55,10 +56,11 @@
 							<a href="{{url_for('delete_stock', storage_id=stock._id )}}" class="modal-close waves-effect waves-green black btn">Delete</a>
 						</div>
 					</div>
+                {% endif %}
 			</div>
 		</li>
             {% else %}
-            <h4>No Results Found</h4>
+            <h5>No Results Found</h5>
             {% endif %}
         {% endfor %}
 	</ul>
