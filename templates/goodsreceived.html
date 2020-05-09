@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h3 class="page-heading">Goods Received</h3>
-<div class="row">
+<h3 class="page-heading teal-text">Goods Received</h3>
+<div class="row teal-text borders">
 	<form action="{{ url_for('goods_receipt') }}" method="POST" class="col s12">
 		<div class="row">
 			<div class="input-field col s12 m6">
@@ -12,7 +12,7 @@
                     <option value="{{customer.customer}}">{{customer.customer}}</option>
                     {% endfor %}
                 </select>
-				<label>Customer</label>
+				<label class="teal-text"><strong>Customer</strong></label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">description</i>
@@ -24,35 +24,35 @@
                     {% endif %}
                     {% endfor %}
                 </select>
-				<label>Product Code</label>
+				<label class="teal-text"><strong>Product Code</strong></label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="delivery_ref" name="delivery_ref" type="text" class="validate" required>
-				<label for="delivery_ref">Delivery Reference</label>
+				<input  id="delivery_ref" name="delivery_ref" type="text" class="validate white-text" required>
+				<label for="delivery_ref" class="white-text">Delivery Reference</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="bbe" name="bbe" type="text" class="validate" required>
-				<label for="bbe">Best Before Date: (DD/MM/YYYY)</label>
+				<input  id="bbe" name="bbe" type="text" class="validate white-text" required>
+				<label class="white-text" for="bbe">Best Before Date: (DD/MM/YYYY)</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="quantity" name="quantity" type="text" class="validate" required>
-				<label for="quantity">Quantity Received</label>
+				<input id="quantity" name="quantity" type="text" class="validate white-text" required>
+				<label class="white-text" for="quantity">Quantity Received</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="location" name="location" type="text" class="validate" required>
-				<label for="location">Location</label>
+				<input id="location" name="location" type="text" class="validate white-text" required>
+				<label class="white-text" for="location">Location</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input type="text" class="datepicker" id="date_received" name="date_received" required>
-				<label for="date_received">Date Received</label>
+				<input type="text" class="datepicker white-text" id="date_received" name="date_received" required>
+				<label class="white-text" for="date_received">Date Received</label>
 			</div>
 		</div>
-		<a><button class="btn waves-effect waves-light green" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a>
+		<a><button class="btn waves-effect waves-light teal black-text" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a>
 
 		<div class="switch hide">
 			<label>
