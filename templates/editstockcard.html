@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h3 class="page-heading">Edit Stock Card</h3>
-<div class="row">
+<h3 class="page-heading teal-text">Edit Stock Card</h3>
+<div class="row borders teal-text">
 	<form action="{{url_for('update_stock_cards', stock_cards_id=stock_cards._id)}}" method="POST" class="col s12">
 		<div class="row">
 			<div class="input-field col s12 m6">
@@ -16,48 +16,41 @@
                         {% endif %}
                     {% endfor %}
                 </select>
-				<label>Customer</label>
+				<label class="teal-text"><strong>Customer</strong></label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="product_code" name="product_code" type="text" class="validate" value="{{ stock_cards.product_code}}" required>
-				<label for="product_code">Product Code</label>
+				<input id="product_code" name="product_code" type="text" class="validate white-text" value="{{ stock_cards.product_code}}" required>
+				<label for="product_code" class="white-text">Product Code</label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="product_desc" name="product_desc" type="text" class="validate" value="{{stock_cards.product_desc}}" required>
-				<label for="product_desc">Product Description</label>
+				<input id="product_desc" name="product_desc" type="text" class="validate white-text" value="{{stock_cards.product_desc}}" required>
+				<label for="product_desc" class="white-text">Product Description</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_weight" name="unit_weight" type="text" class="validate" value="{{stock_cards.unit_weight}}" required>
-				<label for="unit_weight">Unit Weight</label>
+				<input id="unit_weight" name="unit_weight" type="text" class="validate white-text" value="{{stock_cards.unit_weight}}" required>
+				<label for="unit_weight" class="white-text">Unit Weight</label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate" value="{{stock_cards.unit_per_pallet}}" required>
-				<label for="unit_per_pallet">Units Per Pallet</label>
+				<input id="unit_per_pallet" name="unit_per_pallet" type="text" class="validate white-text" value="{{stock_cards.unit_per_pallet}}" required>
+				<label for="unit_per_pallet" class="white-text">Units Per Pallet</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="supplier" name="supplier" type="text" class="validate" value="{{stock_cards.supplier}}" required>
-				<label for="supplier">Supplier</label>
+				<input id="supplier" name="supplier" type="text" class="validate white-text" value="{{stock_cards.supplier}}" required>
+				<label for="supplier" class="white-text">Supplier</label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="packaging" name="packaging" type="text" class="validate" value="{{stock_cards.packaging}}" required>
-				<label for="packaging">Packaging</label>
+				<input id="packaging" name="packaging" type="text" class="validate white-text" value="{{stock_cards.packaging}}" required>
+				<label for="packaging" class="white-text">Packaging</label>
 			</div>
 		</div>
-		<button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="action"><i class="material-icons">create</i></button>
+		<button class="btn-floating btn-large waves-effect waves-light light-green" type="submit" name="action"><i class="material-icons black-text">create</i></button>
 	</form>
 </div>
-<button><a href="{{url_for('manage_stock_cards')}}">Back</a></button>
-
-
-
-
-
-
 
 {% endblock %}

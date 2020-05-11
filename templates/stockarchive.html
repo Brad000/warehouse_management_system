@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h3 class="page-heading">Stock Archive</h3>
+<h3 class="page-heading teal-text">Stock Archive</h3>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul>
 	{% for message in messages %}
-	<li class="alert-warning"><strong>{{ message }}</strong></li>
+	<li class="alert-warning white-text"><strong>{{ message }}</strong></li>
 	{% endfor %}
 </ul>
 {% endif %}
 {% endwith %}
 
-<div class="row">
+<div class="row teal-text borders">
 	<form class="col s12" action="{{ url_for('archive_search_results') }}">
 		<div class="row">
 			<div class="input-field col s12">
 				<i class="material-icons prefix">search</i>
-				<input class="validate" type="text" name="query" required>
+				<input class="validate white-text" type="text" name="query" required>
 				<label for="stock_search_results">Product Code, Delivery Ref or Customer Code</label>
 			</div>
 		</div>
-		<a><button class="btn waves-effect waves-light" type="submit" name="action">Submit
+		<a><button class="btn waves-effect waves-light teal black-text" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button></a>
 	</form>
 </div>
 <div class="row">
-	<ul class="collapsible accordian">
+	<ul class="collapsible accordian grey lighten-2">
     {% for stock in results %}
         {% if stock.in_stock == "off" %}
 		<li>
-			<div class="collapsible-header"><i class="material-icons">expand_more</i>{{ stock.delivery_ref }}</div>
+			<div class="collapsible-header teal lighten-1"><i class="material-icons">expand_more</i>{{ stock.delivery_ref }}</div>
 			<div class="collapsible-body">
                 <strong><p>Date Dispatched: {{ stock.date_dispatched }}</p></strong>
 				<p>Product Code: {{ stock.product_code }}</p>
@@ -42,17 +42,19 @@
 				<p>Best Before Date: {{ stock.bbe }}</p>
 				<p>Quantity: {{ stock.quantity }}</p>
 				<p>Customer: {{ stock.customer }}</p>
-                {% if session['usertype'] == 'warehouse' %}
+                <a href="{{ url_for('stock_archive') }}"><button class="btn waves-effect waves-light teal black-text">Clear</button></a>
+                {% if session['usertype'] == 'manager' %}
 				<!-- Modal Trigger -->
-					<a class="btn-floating btn waves-effect waves-light red sc-button modal-trigger" href="#delete_stock_modal"><i class="material-icons">delete</i></a>
+					<a href="#delete_stock_modal"
+					class="waves-effect waves-light btn red lighten-1 black-text modal-trigger"><i class="material-icons left">delete</i>Delete</a>
 					<!-- Modal Structure -->
-					<div id="delete_stock_modal" class="modal black-text">
+					<div id="delete_stock_modal" class="modal white-text teal">
 						<div class="modal-content">
 							<h4>Delete Confirmation</h4>
 							<p>Are you sure you want to delete this stock?</p>
                             <p>All information and history will be lost</p>
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer teal">
 							<a href="{{url_for('delete_stock', storage_id=stock._id )}}" class="modal-close waves-effect waves-green black btn">Delete</a>
 						</div>
 					</div>
@@ -60,12 +62,12 @@
 			</div>
 		</li>
             {% else %}
-            <h5>No Results Found</h5>
+            <h5 class="white-text">No Results Found</h5>
             {% endif %}
         {% endfor %}
 	</ul>
 </div>
-<a href="{{ url_for('stock_archive') }}"><button class="btn waves-effect waves-light">Clear</button></a>
+
 
 
 {% endblock %}

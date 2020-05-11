@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h3 class="page-heading">Relocation</h3>
-<div class="row">
+<h3 class="page-heading teal-text">Relocation</h3>
+<div class="row borders teal-text">
 	<form action="{{ url_for('dispatch_stock', storage_id=storage._id ) }}" method="POST" class="col s12">
 		<div class="row">
 			<div class="input-field col s12 m6">
@@ -16,7 +16,7 @@
                         {% endif %}
                     {% endfor %}
                 </select>
-				<label>Customer</label>
+				<label class="teal-text"><strong>Customer</strong><em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">description</i>
@@ -30,35 +30,35 @@
                         {% endif %}
                     {% endfor %}
                 </select>
-				<label>Product Code</label>
+				<label class="teal-text"><strong>Product Code</strong><em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">description</i>
-				<input id="delivery_ref" name="delivery_ref" type="text" class="validate" value="{{ storage.delivery_ref }}" disabled>
-				<label for="delivery_ref">Delivery Reference</label>
+				<input id="delivery_ref" name="delivery_ref" type="text" class="validate white-text" value="{{ storage.delivery_ref }}" disabled>
+				<label class="white-text" for="delivery_ref">Delivery Reference<em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="bbe" name="bbe" type="text" class="validate" value="{{ storage.bbe }}" disabled>
-				<label for="bbe">Best Before Date: (DD/MM/YYYY)</label>
+				<input id="bbe" name="bbe" type="text" class="validate white-text" value="{{ storage.bbe }}" disabled>
+				<label class="white-text" for="bbe">Best Before Date: (DD/MM/YYYY)<em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s6">
 				<i class="material-icons prefix">edit</i>
-				<input id="quantity" name="quantity" type="text" class="validate" value="{{ storage.quantity }}" disabled>
-				<label for="quantity">Quantity Received</label>
+				<input id="quantity" name="quantity" type="text" class="validate white-text" value="{{ storage.quantity }}" disabled>
+				<label class="white-text" for="quantity">Quantity Received<em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input id="location" name="location" type="text" class="validate" value="{{ storage.location }}" disabled>
-				<label for="location">Location</label>
+				<input id="location" name="location" type="text" class="validate white-text" value="{{ storage.location }}" disabled>
+				<label class="white-text" for="location">Location<em> (disabled field)</em></label>
 			</div>
 			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">edit</i>
-				<input type="text" class="datepicker" id="date_dispatched" name="date_dispatched" value="{{ storage.date_dispatched }}" required>
-				<label for="date_received">Date Dispatched</label>
+				<input type="text" class="datepicker white-text" id="date_dispatched" name="date_dispatched" value="{{ storage.date_dispatched }}" required>
+				<label class="white-text" for="date_received">Date Dispatched</label>
 			</div>
 		</div>
-        <a><button class="btn waves-effect waves-light green" type="submit" name="action"><i class="material-icons left">local_shipping</i>Dispatch</button></a> 
+        <a><button class="btn waves-effect waves-light red accent-2 black-text" type="submit" name="action"><i class="material-icons left">local_shipping</i>Dispatch</button></a> 
 	</form>
 </div>
 {% endblock %}

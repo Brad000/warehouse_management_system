@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% block content %}
-    <h1>Register</h1>
+    <h1 class="teal-text">Register</h1>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
                 {% for message in messages %}
-                    <li class="alert-warning">{{ message }}</li>
+                    <li class="alert-warning white-text">{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
@@ -14,40 +14,40 @@
     <form action="" method="post">
         {{ form.csrf_token }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
+            {{ form.username.label(class='teal-text') }}<br>
+            {{ form.username(size=32, class='white-text') }}<br>
             {% for error in form.username.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
+            {{ form.password.label(class='teal-text') }}<br>
+            {{ form.password(size=32, class='white-text') }}<br>
             {% for error in form.password.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
+            {{ form.password2.label(class='teal-text') }}<br>
+            {{ form.password2(size=32, class='white-text') }}<br>
             {% for error in form.password2.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}<br>
+            {{ form.email.label(class='teal-text') }}<br>
+            {{ form.email(size=32, class='white-text') }}<br>
             {% for error in form.email.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
          <p>
-            {{ form.usertype.label }}<br>
+            {{ form.usertype.label(class='teal-text') }}<br>
             {{ form.usertype(size=32) }}<br>
             {% for error in form.usertype.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ form.submit(class='teal black-text') }}</p>
     </form>
 {% endblock %}
