@@ -8,6 +8,7 @@
              <i class="material-icons prefix">supervisor_account</i>
 				<select id="customer" name="customer" required>
                     <option value="" disabled selected>Customer Code</option>
+                     <!-- Finds customers on database and autofills the field if matches the selected -->
                     {% for customer in customer %}
                         {% if customer.customer == stock_cards.customer %}
                     <option value="{{customer.customer}}" selected>{{customer.customer}}</option>
@@ -52,5 +53,4 @@
 		<button class="btn-floating btn-large waves-effect waves-light light-green" type="submit" name="action"><i class="material-icons black-text">create</i></button>
 	</form>
 </div>
-
 {% endblock %}

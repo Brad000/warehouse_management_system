@@ -8,6 +8,7 @@
 				<i class="material-icons prefix">supervisor_account</i>
 				<select id="customer" name="customer">
                     <option value="" disabled selected>Customer Code</option>
+                    <!-- Finds customers on database and autofills the field if matches the selected -->
                     {% for customer in customer %}
                         {% if customer.customer == storage.customer %}
                     <option value="{{customer.customer}}" selected disabled>{{customer.customer}}</option>
@@ -22,6 +23,7 @@
 				<i class="material-icons prefix">description</i>
 				<select id="product_code" name="product_code">
                     <option value="" disabled selected>Select Product Code</option>
+                     <!-- Finds product code on database and autofills the field if matches the selected -->
                     {% for product in product %}
                         {% if product.product_code == storage.product_code %}
                     <option value="{{product.product_code}}" selected disabled>{{product.product_code}}</option>
@@ -58,7 +60,7 @@
 				<label class="white-text" for="date_received">Date Dispatched</label>
 			</div>
 		</div>
-        <a><button class="btn waves-effect waves-light red accent-2 black-text" type="submit" name="action"><i class="material-icons left">local_shipping</i>Dispatch</button></a> 
+		<a><button class="btn waves-effect waves-light red accent-2 black-text" type="submit" name="action"><i class="material-icons left">local_shipping</i>Dispatch</button></a>
 	</form>
 </div>
 {% endblock %}

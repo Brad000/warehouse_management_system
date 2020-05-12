@@ -8,6 +8,7 @@
 				<i class="material-icons prefix">supervisor_account</i>
 				<select id="customer" name="customer" required>
                     <option value="" disabled selected>Customer Code</option>
+                     <!-- Finds customers on database -->
                     {% for customer in customer %}
                     <option value="{{customer.customer}}">{{customer.customer}}</option>
                     {% endfor %}
@@ -18,6 +19,7 @@
 				<i class="material-icons prefix">description</i>
 				<select id="product_code" name="product_code" required>
                     <option value="" disabled selected>Select Product Code</option>
+                    <!-- Finds product codes from database and only shows active stock product codes -->
                     {% for product in product %}
                     {% if product.active == 'on' %}
                     <option value="{{product.product_code}}">{{product.product_code}}</option>
@@ -52,14 +54,14 @@
 				<label class="white-text" for="date_received">Date Received</label>
 			</div>
 		</div>
-		<a><button class="btn waves-effect waves-light teal black-text" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a>
-
+		    <a><button class="btn waves-effect waves-light teal black-text" type="submit" name="action"><i class="material-icons left">check</i>Complete Receipt</button></a>
+        <!-- hiden inputs to database to allow stock to be dispatched at later date -->
 		<div class="switch hide">
 			<label>
-                    <input type="checkbox" id="in_stock" name="in_stock" checked>
-                    <span class="lever"></span>
-                    On
-                </label>
+                <input type="checkbox" id="in_stock" name="in_stock" checked>
+                <span class="lever"></span>
+                                    On
+            </label>
 		</div>
 		<div class="input-field col s12 m6 hide">
 			<i class="material-icons prefix">edit</i>

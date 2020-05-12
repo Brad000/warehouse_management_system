@@ -16,6 +16,8 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# Home
+
 
 @app.route('/')
 @app.route('/home')
@@ -23,10 +25,7 @@ def home():
     users = mongo.db.users.find()
     return render_template("index.html", users=users)
 
-
-@app.route('/template')
-def template():
-    return render_template("template.html")
+# Login, Logout & Register
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -39,20 +38,21 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        # get all users
+        # returns all users from database
         users = mongo.db.users
-        # try and get one with same name as entered
+        # attempt to find one that matches what has been entered
         db_user = users.find_one({'name': request.form['username'],
                                   'usertype': request.form['usertype']})
 
         if db_user:
             # check password using hashing
+            # puts username and usertype into session
             if bcrypt.hashpw(request.form['password'].encode('utf-8'),
                              db_user['password']) == db_user['password']:
                 session['username'] = request.form['username']
                 session['usertype'] = request.form['usertype']
                 session['logged_in'] = True
-                # successful redirect to home logged in
+                # successful login redirect to home
                 return redirect(url_for('home', title="Login", form=form))
             # must have failed set flash message
             flash('Invalid username/password combination')
@@ -61,7 +61,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    """Clears session and redirects to home"""
+    # Clears session and redirects to home
     session.clear()
     return redirect(url_for('home'))
 
@@ -71,15 +71,16 @@ def register():
     """Handles registration functionality"""
     form = RegisterForm(request.form)
     if form.validate_on_submit():
-        # get all the users
+        # returns all users
         users = mongo.db.users
-        # see if we already have the entered username
+        # check to see if username exists
         existing_user = users.find_one({'name': request.form['username']})
 
         if existing_user is None:
             # hash the entered password
             hash_pass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # insert the user to DB
+            # puts username and usertype into session
             users.insert_one({'name': request.form['username'],
                               'password': hash_pass,
                               'email': request.form['email'],
@@ -93,11 +94,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/goods_received')
-def goods_received():
-    customer = mongo.db.customer.find()
-    product = mongo.db.stock_cards.find()
-    return render_template("goodsreceived.html", customer=customer, product=product)
+# Stock Cards
 
 
 @app.route('/manage_stock_cards')
@@ -199,6 +196,8 @@ def delete_stock_cards(stock_cards_id):
     mongo.db.stock_cards.remove({'_id': ObjectId(stock_cards_id)})
     flash("Stock Card Deleted")
     return redirect(url_for('manage_stock_cards'))
+
+# Stock Control
 
 
 @app.route('/goods_receipt', methods=['POST'])
@@ -332,7 +331,14 @@ def delete_stock(storage_id):
     return redirect(url_for('stock_search'))
 
 
+@app.route('/goods_received')
+def goods_received():
+    customer = mongo.db.customer.find()
+    product = mongo.db.stock_cards.find()
+    return render_template("goodsreceived.html", customer=customer, product=product)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)

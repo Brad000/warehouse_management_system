@@ -2,6 +2,7 @@
 {% extends 'base.html' %} {% block content %}
 <h3 class="page-heading teal-text">Manage Stock Cards</h3>
 <h4 class="teal-text">Search Results</h4>
+<!-- Stock search for active stock card -->
 {% for stock in results %}
     {% if stock.active == "on" %}
 <div class="row borders">
@@ -33,5 +34,4 @@
 	</a>
 </div>
  <a href="{{ url_for('manage_stock_cards') }}"><button class="btn waves-effect waves-light teal black-text">Clear</button></a>
-
 {% endblock %}

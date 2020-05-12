@@ -27,6 +27,7 @@
 </div>
 <div class="row">
 	<ul class="collapsible accordian grey lighten-2">
+    <!-- stock search for only dispatched stock -->
     {% for stock in results %}
         {% if stock.in_stock == "off" %}
 		<li>
@@ -43,6 +44,7 @@
 				<p>Quantity: {{ stock.quantity }}</p>
 				<p>Customer: {{ stock.customer }}</p>
                 <a href="{{ url_for('stock_archive') }}"><button class="btn waves-effect waves-light teal black-text">Clear</button></a>
+                <!-- Delete function only accessable to usertype manager -->
                 {% if session['usertype'] == 'manager' %}
 				<!-- Modal Trigger -->
 					<a href="#delete_stock_modal"
@@ -67,7 +69,4 @@
         {% endfor %}
 	</ul>
 </div>
-
-
-
 {% endblock %}

@@ -10,6 +10,7 @@
 {% endif %}
 {% endwith %}
 <div>
+	<!-- Gets username if logged in -->
 	{% if 'username' in session %}
 	<div class="text-light font-italic bg-dark pt-2 pr-4 text-center teal-text">
 		<strong>Logged in as: {{ session['username'] }}  ({{ session['usertype']}})</strong>
@@ -21,10 +22,11 @@
 		</div>
 	</div>
 	{% endif %}
+	<!-- Home view if user has logged in -->
 	{% if 'username' in session %}
 	<div class="borders">
 		<h2>Welcome Back, {{ session['username']}}</h2>
-        <hr>
+		<hr>
 		<br>
 		<h5>System Updates</h5>
 		<ol>
@@ -40,22 +42,22 @@
 		<p>Email: bbaccountsupport@mail.com</p>
 	</div>
 	{% else %}
-	<div  class="teal-text borders-index">
+	<!-- Home view if there has been no login -->
+	<div class="teal-text borders-index">
 		<h2>Welcome To BB Storage Solutions</h2>
 		<hr>
-		<p>Our dynamic warehouse management system tool, to help you push your business ahead of your competitors, our
-			ever
-			improving systems are built around you and your needs to provide first class solutions to all your problems
+		<p>Our dynamic warehouse management system tool, to help you push your business ahead of your competitors, our	ever improving systems are built around you and your needs to provide first class solutions to all your
+			problems
 		</p>
-
-		<p>For more products or infomation please visit our website<a class="white-text" href="https://brad000.github.io/Resume-project/"
-				target="_blank"> www.bbstoragesolutions.co.uk</a></p>
-
+		<p>For more products or infomation please visit our website<a class="white-text"
+				href="https://brad000.github.io/Resume-project/" target="_blank"> www.bbstoragesolutions.co.uk</a>
+		</p>
 		<p>If you already have an account with us or are looking to sign up please use the <a class="white-text"
-				href="{{ url_for('login') }}">login</a> or <a class="white-text" href="{{ url_for('register') }}">register</a> links
+				href="{{ url_for('login') }}">login</a> or <a class="white-text"
+				href="{{ url_for('register') }}">register</a> links
 			provided.
 		</p>
 		{% endif %}
-    </div>
+	</div>
 </div>
-	{% endblock %}
+{% endblock %}
